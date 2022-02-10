@@ -1,12 +1,16 @@
+$def with (message)
 <!DOCTYPE html>
 <html>
-    <title>Login</title>
+    <head>
+        <title>Login</title>
+    </head>
     <body>
-        <h1>Login</h1>
-        <form method="POST">
-            <input type="text" name="email" id="email"><br><br>
-            <input type="password" name="password" id="password"><br><br>
-            <input type="submit" value="login">
+        $message <!-- variable message-->
+        <h1>Login</h1> <!-- Login con letra tipo H1-->
+        <form method="POST"> <!-- Se crea el formulario-->
+            <input type="email" name="email" id="email"><br> <!-- Campo email-->
+            <input type="password" name="password" id="password"><br> <!-- Campo password-->
+            <input type="submit" value="Login"><br> <!-- boton login-->
         </form>
     </body>
 </html>
