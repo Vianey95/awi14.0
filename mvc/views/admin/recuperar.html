@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+    <head>
+        <title>Password reset </title>
+    </head>
+    <body>
+        <section id="formulario">
+            <form method="POST">
+        <h1>Recuperar contraseña</h1> <!-- Login con letra tipo H1-->
+        <div class="contenedor">
+
+            <div class="input-contenedor">
+                <div class="input-contenedor">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="text" placeholder="Correo ">
+                    <!-- Campo password-->
+                    </div>
+            <input type="submit"   class="button" value="recuperar_password"><br> <!-- boton login-->
+            </div>
+        </section>
+        </form>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
+                background: url(https://png.pngtree.com/thumb_back/fh260/background/20201019/pngtree-polygonal-vector-blue-background-horizontal-banner-for-web-pages-presentations-layouts-image_422829.jpg);
+                background-size: cover;
+                background-attachment: fixed;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            .contenedor{
+                width: 100%;
+                padding: 5px;
+            }
+            #formulario{
+              position: center;
+              width: 400px;
+              height: 400px;
+              padding-left: 10px;
+              padding-top: 15px;
+              background-color: white;
+              border-radius: 20px;
+              margin: auto;
+            }
+            h1{
+                text-align: center;
+                color: #1a2537;
+                font-size: 40px;
+            }
+            input[type="text"],
+            input[type="password"]{
+                font-size: 20px;
+                width: 82%;
+                padding: 10px;
+                border: none;
+            }
+            .input-contenedor{
+                margin-bottom: 15px;
+                border: 1px solid #aaa;
+            }
+            .icon{
+                min-width: 50px;
+                text-align: center;
+                color: #999;
+            }
+            .button{
+                border: none;
+                width: 100%;
+                color: white;
+                font-size: 20px;
+                background:  #1a2537;
+                padding: 15px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .button:hover{
+                background: cadetblue;
+            }
+            p{
+                text-align: center;
+            }
+            .link{
+                text-decoration: none;
+                  color: #1a2537;
+                font-weight: 600;
+            }
+            .link:hover{
+                 color: cadetblue;
+            }
+            @media(min-width:768px)
+            {
+                #formulario{
+                    margin: auto;
+                    width: 500px;
+                    margin-top: 150px;
+                    border-radius: 2%;
+                }
+            }
+            </style>
+            
+            
+            </body>
+            </html>

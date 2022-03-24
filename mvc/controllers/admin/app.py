@@ -11,7 +11,7 @@ urls = (
 ) #url de las paginas a acceder
 
 app = web.application(urls, globals()) # configura las urls en la aplicacion web
-render = web.template.render('views') # se menciona la carpeta en donde se encontraran nuestros archivos html 
+render = web.template.render('mvc/views/admin') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
 class Logout: #clase loguot
     def GET(self):

@@ -9,7 +9,7 @@ urls = (
 )
 
 recuperar = web.application(urls, globals()) # configura las urls en la aplicacion web
-render = web.template.render('views')
+render = web.template.render('mvc/views/admin')
 
 class Recuperar: #clase recuperar password
     def GET(self):
