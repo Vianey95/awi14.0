@@ -4,7 +4,8 @@ import firebase_config as token
 import json # se importa la libreria (JSON)
 
 urls = (
-    '/index', 'Index', #raiz/ clase
+    '/index', 'Index', 
+    '/login', 'Login'#raiz/ clase
     
 ) #url de las paginas a acceder
 
