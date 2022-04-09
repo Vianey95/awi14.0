@@ -1,27 +1,187 @@
-<!DOCTYPE html>
-<html>
-    <head>  <!-- Cabecera-->
-        <title>Login</title> <!-- Titulo-->
-    </head>  <!-- cierre de cabecera-->
-    <body> <!-- cuerpo-->
-        <section id="contenedor">
-        <h1><n>Bienvenida</n> </h1> <!-- Bienvenida con letra  tipo h1-->
-        <p>Tus datos son correctos</p><br> <!-- Parrafo-->
-        <p>Ahora podras interactuar a tu comodidad</p>
-        <a href = "/logout">Logout</a> <!--pagina logout-->
-    </section>
-
+<!DOCTYPE HTML> 
+<HTML>
+<HEAD> 
+   <meta charset="utf-8">
+   <title>Proyecto</title>
+   <meta name="description" content="pa">
+</head>
+<body>
+<header class="encabezado"> 
+   <nav>
+      <div><img src="logo.jpg"></div>
+      <ul> 
+          <li><a href="/index"> logout </a></li>
+      </ul> 
+   </nav> 
+</header>
+</body>
+    <h1>Bienvenido Administrador </h1>
+    <div class="container">
+        <div class="item">
+          <img src="n1.jpg"  style="width: 230px; height:190px;">
+          <div class="item-text">
+            <h4>Lista de usuarios </h4>
+          </div>
+        </div>
+        
+    
+        <div class="item">
+          <img src="p5.jpg"  style="width: 230px; height:190px;">
+          <div class="item-text">
+            <h4>Agregar administradores y operadores</h4>
+          </div>
+        </div>
+        
+        <div class="item">
+          <img src="xv.jpg"  style="width: 230px; height:190px;">
+          <div class="item-text">
+            <h4>Sucursales</h4> 
+          </div>
+        </div>
+        </div> 
+</HTML>
 <style>
-            #contenedor{
-            position: center;
-            width: 1000px;
-            height: 1000px;
-            padding-left: 90px;
-            padding-top: 15px;
-            background-color: #F8DEBE ;
-            border-radius: 20px;
-            margin: auto;
-          }
+*{
+  margin: 0;
+  padding: 0;
+}
+p {
+     text-align: center;
+     font-size: 10;
+}
+h1 {
+     text-align: center;
+     font-size: 12;
+}
+h4 {
+     text-align: center;
+	 color: (25,0,0);
+     font-size: 15;
+}
+.encabezado{
+  background: #1a2537;
+}
+img{
+  width: 150px;
+  border-radius: 10%;
+  align-content: center;
+}
+.encabezado nav{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+
+}
+.encabezado nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+a{
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  padding: 12px 20px;
+  display: block;
+}
+a:hover{
+  background: #008A93;
+
+}
+.encabezado nav ul li ul{
+  display:flex;
+  flex-direction: column;
+}
+.encabezado nav ul li ul{
+  position: absolute;
+  background: #008A93;
+}
+.encabezado nav ul li ul{
+  display: none;
+}
+
+
+
+header {
+    padding: 40px 0;
+  }
+  
+  header .logo {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .container{
+  width: 90%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 30px;
+}
+
+
+.item{
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.095);
+  
+  transition: all 300ms;
+  
+  position: relative;
+}
+.item::after {
+  content: "";
+  background-color: rgba(179, 229, 252, .1);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  transform: scale(0);
+  transition: all 300ms;
+  opacity: 0;
+}
+
+.item:hover:after{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.item:hover {
+  transform: scale(1.05);
+}
+
+.item-text{
+  padding: 1em;
+}
+
+
+.item-img{
+  max-width: 100%;
+  display: block;
+  align-items: center;
+}
+
+@media screen and (min-width: 590px) {
+  
+  .container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+}
+
+
+@media screen and (min-width: 960px) {
+  
+  .container{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+}
+
 </style>
-    </body> <!-- Cierre de cuerpo-->
-</html>

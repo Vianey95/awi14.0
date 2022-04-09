@@ -11,7 +11,7 @@ urls = (
 ) #url de las paginas a acceder
 
 app = web.application(urls, globals()) # configura las urls en la aplicacion web
-render = web.template.render('mvc/views/admin') # se menciona la carpeta en donde se encontraran nuestros archivos html 
+render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
 class Logout: #clase loguot
     def GET(self):
@@ -23,7 +23,7 @@ class Bienvenida:
         try: # prueba el siguiente bloque de codigo
             print("Bienvenida.GET localID: ",web.cookies().get('localIdd')) # se imprime el valor de localIdd
             if web.cookies().get('localIdd') == None: # Validar si el usuario esta logueado
-                return web.seeother("login") # si no esta logueado renderiza a login
+                return web.seeother("bienvenida") # si no esta logueado renderiza a login
             else: #si no 
                 #TODO UN IF
                 return render.bienvenida() #se renderiza bienvenida.html
