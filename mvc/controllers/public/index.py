@@ -6,13 +6,16 @@ import json # se importa la libreria (JSON)
 urls = (
     '/index', 'Index', 
     '/login', 'Login',
-    '/bienvenida', 'Bienvenida'
+    '/bienvenida', 'Bienvenida',
+    '/bienvenida2', 'Bienvenida2'
 
     
 ) #url de las paginas a acceder
 
 index = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
+render_plain = web.template.render('mvc/views/operador/') # se menciona la carpeta en donde se encontraran nuestros archivos html
+
 
 class Index: #clase index
     def GET(self):
@@ -39,11 +42,9 @@ class Login: #clase login
             password= formulario.password # se alamcena el valor de password del formulario
             print(email,password) # se imprimen para verificar los valores recibidos
             user = auth.sign_in_with_email_and_password(email, password) #codigo para inisiar sesion de usuarios
-           
             web.setcookie('localIdd', user['localId'], 3600) # se almacena en una cookie el localIdd
             print("localId:",web.cookies().get('localIdd')) # se imprime la cookie 
-
-            return web.seeother("bienvenida") # Redirecciona a la pagna bienvenida
+            return web.seeother("bienvenida2") # Redirecciona a la pagna bienvenida
         except Exception as error: # atrapa algun error
             formato = json.loads(error.args[1]) # Error en formato JSON 1 puede variar segun el numero que indiques (son parte del codigo de error json)
             error = formato['error'] # Se obtiene el json de error
@@ -62,6 +63,16 @@ class Bienvenida:
                 return render.bienvenida() #se renderiza bienvenida.html
         except Exception as error: # se atrapa algun error
             print("Error Bienvenida.GET: {}".format(error)) 
+class Bienvenida2:
+    def GET(self): #se invoca al entrar ala ruta /bienvenida
+        try: # prueba el siguiente bloque de codigo
+            print("Bienvenida2.GET localID: ",web.cookies().get('localIdd')) # se imprime el valor de localIdd
+            if web.cookies().get('localIdd') == None: # Validar si el usuario esta logueado
+                return web.seeother("bienvenida2") # si no esta logueado renderiza a login
+            else: 
+                return render_plain.bienvenida2() #se renderiza bienvenida.html
+        except Exception as error: # se atrapa algun error
+            print("Error Bienvenida2.GET: {}".format(error)) 
 if __name__ == "__main__":
     web.config.debug = False # Activa  el modo de repuracion de firebase
     index.run() # ejecuta al web app   
