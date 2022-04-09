@@ -62,6 +62,16 @@ class Login: #clase login
             web.setcookie('localIdd', None, 3600)
             return render.login(message) # se muestra nuevamente login mostrando el mensaje de error
 
+class Recuperar: #clase recuperar password
+    def POST(self): 
+            firebase = pyrebase.initialize_app(token.firebaseConfig) #se realiza la autenticacion con firebase
+            auth = firebase.auth() # se crea un objeto para usar el servicios de autenticacion de firebase
+            formulario = web.input() # Se crea una variable formulario para recibir los datos del login.html
+            email = formulario.email # se almacena el valor de email del formulario
+            print("Email:",email)
+            recuperacion =auth.send_password_reset_email(email) #codigo para recuperar contraseña almacenado en una variable
+            print(recuperacion)
+            return render.recuperar()
 if __name__ == "__main__":
     web.config.debug = False # Activa  el modo de repuracion de firebase
     app.run() # ejecuta al web app    

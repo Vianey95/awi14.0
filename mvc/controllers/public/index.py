@@ -7,7 +7,8 @@ urls = (
     '/index', 'Index', 
     '/login', 'Login',
     '/bienvenida', 'Bienvenida',
-    '/bienvenida2', 'Bienvenida2'
+    '/bienvenida2', 'Bienvenida2',
+    '/recuperar', 'Recuperar',
 
     
 ) #url de las paginas a acceder
@@ -73,6 +74,29 @@ class Bienvenida2:
                 return render_plain.bienvenida2() #se renderiza bienvenida.html
         except Exception as error: # se atrapa algun error
             print("Error Bienvenida2.GET: {}".format(error)) 
+
+
+class Recuperar: #clase recuperar password
+    def GET(self): 
+        message = None
+        return render.recuperar(message)
+
+    def POST(self):
+        try: 
+            message= None
+            firebase = pyrebase.initialize_app(token.firebaseConfig) #se realiza la autenticacion con firebase
+            auth = firebase.auth() # se crea un objeto para usar el servicios de autenticacion de firebase
+            formulario = web.input() # Se crea una variable formulario para recibir los datos del login.html
+            email = formulario.email # se almacena el valor de email del formulario
+            recuperacion =auth.send_password_reset_email(email) #codigo para recuperar contraseña almacenado en una variable
+            print(recuperacion)
+            return web.seeother("/login") 
+        except Exception as error:
+            formato = json.loads(error.args[1]) 
+            error = formato['error'] 
+            message = error['message']
+            print("Error recuperar.POST: {}".format(message))
+            return render.recuperar(message)          
 if __name__ == "__main__":
     web.config.debug = False # Activa  el modo de repuracion de firebase
     index.run() # ejecuta al web app   
