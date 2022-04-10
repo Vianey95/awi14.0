@@ -1,7 +1,5 @@
 import web  #se importa la libreria web.py
-import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
-import firebase_config as token 
-import json # se importa la libreria (JSON)
+import app
 
 
 lista_user = web.application(urls, globals()) # configura las urls en la aplicacion web

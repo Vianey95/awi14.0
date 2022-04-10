@@ -1,23 +1,10 @@
 import web  #se importa la libreria web.py
-import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
-import firebase_config as token 
-import json # se importa la libreria (JSON)
+import app
+
 
 app = web.application(urls, globals()) # configura las urls en la aplicacion web
-render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
-
-
-class Bienvenida:
-    def GET(self): #se invoca al entrar ala ruta /bienvenida
-        try: # prueba el siguiente bloque de codigo
-            print("Bienvenida.GET localID: ",web.cookies().get('localIdd')) # se imprime el valor de localIdd
-            if web.cookies().get('localIdd') == None: # Validar si el usuario esta logueado
-                return web.seeother("bienvenida") # si no esta logueado renderiza a login
-            else: #si no 
-                #TODO UN IF
-                return render.bienvenida() #se renderiza bienvenida.html
-        except Exception as error: # se atrapa algun error
-            print("Error Bienvenida.GET: {}".format(error)) 
+render = web.template.render('mvc/views/public/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
+ 
 
 class Login: #clase login
     def GET(self): # se invoca al entrar a la ruta /login
@@ -63,16 +50,4 @@ class Login: #clase login
             web.setcookie('localIdd', None, 3600)
             return render.login(message) # se muestra nuevamente login mostrando el mensaje de error
 
-class Recuperar: #clase recuperar password
-    def POST(self): 
-            firebase = pyrebase.initialize_app(token.firebaseConfig) #se realiza la autenticacion con firebase
-            auth = firebase.auth() # se crea un objeto para usar el servicios de autenticacion de firebase
-            formulario = web.input() # Se crea una variable formulario para recibir los datos del login.html
-            email = formulario.email # se almacena el valor de email del formulario
-            print("Email:",email)
-            recuperacion =auth.send_password_reset_email(email) #codigo para recuperar contraseña almacenado en una variable
-            print(recuperacion)
-            return render.recuperar()
-if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    app.run() # ejecuta al web app    
+ 
