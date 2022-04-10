@@ -4,8 +4,9 @@ import json
 import app
 import firebase_config as token
 
-render = web.template.render('mvc/views/public/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
- 
+render = web.template.render('mvc/views/public/') # se menciona la carpeta en donde se encontraran nuestros archivos html
+render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html
+render = web.template.render('mvc/views/operador/') # se menciona la carpeta en donde se encontraran nuestros archivos html
 
 class Login: #clase login
     def GET(self): # se invoca al entrar a la ruta /login
@@ -35,13 +36,13 @@ class Login: #clase login
                         return web.seeother('/bienvenida') 
                     else:
                         admin = user.val()['nivel'] == "admin"
-                        return web.seeother('/login')
+                        return web.seeother('/logout')
                 elif user.key() == localId and user.val()['nivel'] == "operador":
                     if user.val()['estado'] == 'true':
                         return web.seeother('/bienvenida2') 
                     else:
                         admin = user.val()['nivel'] == "admin"
-                        return web.seeother('/login')
+                        return web.seeother('/logout')
         except Exception as error: 
             formato = json.loads(error.args[1])
             error = formato['error'] 

@@ -4,14 +4,7 @@ import app
 import firebase_config as token
 import json
 
-urls = (
-    '/registrar', 'Registrar', #raiz/ clase
-    '/bienvenida', 'Bienvenida',
-    '/logout' , 'Logout'
-    '/recuperar' , 'Recuperar'
-) #url de las paginas a acceder
 
-app = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 class Registrar: 
     def GET(self):
@@ -43,7 +36,4 @@ class Registrar:
             message = error['message']
             print("Error registrar.POST: {}".format(message)) 
             return render.registrar(message) 
-
-if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    app.run() # ejecuta al web app 
+p 

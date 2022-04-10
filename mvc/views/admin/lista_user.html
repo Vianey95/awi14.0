@@ -1,3 +1,4 @@
+$def with (user)
 <!DOCTYPE HTML> <!--El<html>es la raiz de la página html.¡-->
 <HTML>
 <HEAD> 
@@ -8,35 +9,38 @@
 <body>
 <header class="encabezado"> 
    <nav>
-      <div><img src="logo.jpg"></div>
       <ul> 
-          <li><a href="/index"> Home </a></li>
+          <li><a href="/login"> Home </a></li>
       </ul> 
    </nav>
-</header>
-
-
-<table>
-    <teach>
-        <tr>
-            <th>Nombre</th>
-            <th> Email</th>
-            <th> Phone</th>
-            <th> Nivel</th>
-            <th> Estado</th>
-            <th> Actualizar</th>
-            <td>$user.val().get('nombre')</td>
-        </tr>
-
-    </teach>
-</table>
-</body>  
-<header>    
-
-	
-           
-
-</HTML>
+</header> 
+        <h1>Lista de usuarios</h1>
+        <table> 
+          <thead> 
+            <tr> 
+              <th>Nombre usuario</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th>Nivel</th>
+              <th>Estado</th>
+              <th>Actualizar</th>
+            </tr>
+            $for user in users:
+            <tbody><tr> 
+              <td>$user.val().get('nombre')</td>
+              <td>$user.val().get('telefono')</td>
+              <td>$user.val().get('email')</td>
+              <td>$user.val().get('nivel')</td>
+              <td>$user.val().get('estado')</td>
+              <td><a href="/actualizar"> Actualizar </a></td>
+              <td> </td>
+            </tr>
+               </tbody>
+          </thead>
+        </table>
+        
+    </body>
+</html>
 <style>
     * {
     margin: 0; 
@@ -104,7 +108,7 @@ img{
 a{
   text-decoration: none;
   font-size: 20px;
-  color: white;
+  color: #075581;
   padding: 12px 20px;
   display: block;
 }
