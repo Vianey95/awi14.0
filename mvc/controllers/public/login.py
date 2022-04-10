@@ -2,6 +2,7 @@ import web  #se importa la libreria web.py
 import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
 import json
 import app
+import firebase_config as token
 
 render = web.template.render('mvc/views/public/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
  

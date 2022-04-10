@@ -1,12 +1,18 @@
 import web
-import app
 import pyrebase
-import mvc.controllers.public.firebase_config as token
+import app
+import firebase_config as token
 import json
 
-render = web.template.render("mvc/views/admin/")
-registrar = web.application(urls, globals()) # configura las urls en la aplicacion web
+urls = (
+    '/registrar', 'Registrar', #raiz/ clase
+    '/bienvenida', 'Bienvenida',
+    '/logout' , 'Logout'
+    '/recuperar' , 'Recuperar'
+) #url de las paginas a acceder
 
+app = web.application(urls, globals()) # configura las urls en la aplicacion web
+render = web.template.render('mvc/views/admin') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 class Registrar: 
     def GET(self):
         message = None
@@ -30,10 +36,14 @@ class Registrar:
             results = db.child("usuarios").child(user['localId']).set(datos_user) 
             print(datos_user)
             print(results)
-            return web.seeother('/lista_user') 
+            return web.seeother('/index') 
         except Exception as error:
             formato = json.loads(error.args[1])
             error = formato['error']
             message = error['message']
             print("Error registrar.POST: {}".format(message)) 
             return render.registrar(message) 
+
+if __name__ == "__main__":
+    web.config.debug = False # Activa  el modo de repuracion de firebase
+    app.run() # ejecuta al web app 
