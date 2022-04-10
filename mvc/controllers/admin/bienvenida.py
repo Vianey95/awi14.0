@@ -2,7 +2,7 @@ import web  #se importa la libreria web.py
 import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
 import json
 import app
-import firebase_config as token
+import mvc.firebase_config as token
 
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
@@ -10,8 +10,8 @@ render = web.template.render('mvc/views/admin/') # se menciona la carpeta en don
 class Bienvenida:
     def GET(self): #se invoca al entrar ala ruta /bienvenida
         try: # prueba el siguiente bloque de codigo
-            print("Bienvenida.GET localID: ",web.cookies().get('localIdd')) # se imprime el valor de localIdd
-            if web.cookies().get('localIdd') == None: # Validar si el usuario esta logueado
+            print("Bienvenida.GET localID: ",web.cookies().get('localId')) # se imprime el valor de localIdd
+            if web.cookies().get('localId') == None: # Validar si el usuario esta logueado
                 return web.seeother("bienvenida") # si no esta logueado renderiza a login
             else: #si no 
                 #TODO UN IF

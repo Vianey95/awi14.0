@@ -1,6 +1,6 @@
 import web  #se importa la libreria web.py
 import app
-import firebase_config as token
+import mvc.firebase_config as token
 
 
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 

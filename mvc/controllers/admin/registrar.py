@@ -41,4 +41,3 @@ class Registrar:
             message = error['message']
             print("Error registrar.POST: {}".format(message)) 
             return render.registrar(message) 
-p 
