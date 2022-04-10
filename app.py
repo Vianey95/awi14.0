@@ -1,6 +1,7 @@
 import web  #se importa la libreria web.pyimport pyrebase
 import pyrebase
 import json
+import mvc.firebase_config as token 
 urls = (
     '/', 'mvc.controllers.public.index.Index',
     '/login', 'mvc.controllers.public.login.Login',
@@ -14,11 +15,9 @@ urls = (
     
 ) #url de las paginas a acceder
 
-
-
-app = web.application(urls, globals())
-wsgiapp = app.wsgifunc()
+    
+app = web.application(urls, globals()) 
 
 if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    app.run() # ejecuta al web app     
+    web.config.debug = False 
+    app.run()

@@ -1,8 +1,9 @@
 import web  #se importa la libreria web.py
+import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
+import json
 import app
+import mvc.controllers.public.firebase_config as token
 
-
-bienvenida = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
 
@@ -16,8 +17,4 @@ class Bienvenida:
                 #TODO UN IF
                 return render.bienvenida() #se renderiza bienvenida.html
         except Exception as error: # se atrapa algun error
-            print("Error Bienvenida.GET: {}".format(error)) 
-
-if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    bienvenida.run() # ejecuta al web app     
+            print("Error Bienvenida.GET: {}".format(error))  

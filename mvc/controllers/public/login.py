@@ -1,8 +1,8 @@
 import web  #se importa la libreria web.py
+import pyrebase #Se importa la libreria para conectarse a la firebase pip install pyrebase4
+import json
 import app
 
-
-app = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/public/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
  
 
@@ -27,27 +27,26 @@ class Login: #clase login
             user = auth.sign_in_with_email_and_password(email, password) #codigo para inisiar sesion de usuarios
             web.setcookie('localIdd', user['localId'], 3600) # se almacena en una cookie el localIdd
             print("localId:",web.cookies().get('localIdd')) # se imprime la cookie 
-
-            all_users = db.child("usuarios").get() #obtiene todos los usuarios
+            all_users = db.child("usuarios").get() 
             for user in all_users.each():
-                if user.key() == localIdd and user.val()['level'] == "admin": #compara el localId y el email
-                    if user.val()['status'] == 'true':
-                        return web.seeother('/bienvenida') #redirecciona a la pagina de admin
+                if user.key() == localIdd and user.val()['nivel'] == "admin":
+                    if user.val()['estado'] == 'true':
+                        return web.seeother('/bienvenida') 
                     else:
-                        admin = user.val()['level'] == "admin"
+                        admin = user.val()['nivel'] == "admin"
                         return web.seeother('/login')
-                elif user.key() == localId and user.val()['level'] == "operador":
-                    if user.val()['status'] == 'true':
-                        return web.seeother('/bienvenida2') #redirecciona a la pagina de operador
+                elif user.key() == localId and user.val()['nivel'] == "operador":
+                    if user.val()['estado'] == 'true':
+                        return web.seeother('/bienvenida2') 
                     else:
-                        admin = user.val()['level'] == "admin"
+                        admin = user.val()['nivel'] == "admin"
                         return web.seeother('/login')
-        except Exception as error: # atrapa algun error
-            formato = json.loads(error.args[1]) # Error en formato JSON 1 puede variar segun el numero que indiques (son parte del codigo de error json)
-            error = formato['error'] # Se obtiene el json de error
-            message = error['message'] # se obtiene el mensaje de error
-            print("Error Login.POST: {}".format(message)) # se imprime el message enviado por firebase
+        except Exception as error: 
+            formato = json.loads(error.args[1])
+            error = formato['error'] 
+            message = error['message'] 
+            print("Error Login.POST: {}".format(message)) 
             web.setcookie('localIdd', None, 3600)
-            return render.login(message) # se muestra nuevamente login mostrando el mensaje de error
+            return render.login(message) 
 
  

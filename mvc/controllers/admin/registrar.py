@@ -1,16 +1,8 @@
 import web
 import app
 import pyrebase
-import firebase_config as token
+import mvc.controllers.public.firebase_config as token
 import json
-
-urls = (
-    '/registrar' , 'Registrar',
-    '/login', 'Login', #raiz/ clase
-    '/bienvenida', 'Bienvenida',
-    '/logout' , 'Logout'
-    
-) #url de las paginas a acceder
 
 render = web.template.render("mvc/views/admin/")
 registrar = web.application(urls, globals()) # configura las urls en la aplicacion web
@@ -45,7 +37,3 @@ class Registrar:
             message = error['message']
             print("Error registrar.POST: {}".format(message)) 
             return render.registrar(message) 
-
-if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    registrar.run() # ejecuta al web app   

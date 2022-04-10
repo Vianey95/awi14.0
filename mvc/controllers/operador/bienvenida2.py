@@ -1,14 +1,10 @@
 import web  #se importa la libreria web.py
 import app
+import mvc.controllers.public.firebase_config as token
 
 
-bienvenida = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
-class Logout: #clase loguot
-    def GET(self):
-        web.setcookie('localIdd' == None) # Cambiar el valor de localidd a vacio 
-        return render.seeother("/index") #renderizar a loguot
 
 class Bienvenida2:
     def GET(self): #se invoca al entrar ala ruta /bienvenida
@@ -22,6 +18,3 @@ class Bienvenida2:
         except Exception as error: # se atrapa algun error
             print("Error Bienvenida2.GET: {}".format(error)) 
 
-if __name__ == "__main__":
-    web.config.debug = False # Activa  el modo de repuracion de firebase
-    bienvenida.run() # ejecuta al web app 
