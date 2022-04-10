@@ -9,27 +9,34 @@ $def with (message)
             <h1 >Registrarse</h1>
             <div class="contenedor"> 
                 <div class="input-contenedor">
-                  <input type="text" name="name" id="name" placeholder="Nombre completo">
+                  <input type="text" name="nombre" id="name" placeholder="Nombre completo">
                 </div>
                 <div class="input-contenedor">
-                  <input type="text" name="phone" id="phone" placeholder="Correo electronico">
+                  <input type="text" name="telefono" id="telefono" placeholder="Telefono">
                 </div>
                 <div class="input-contenedor">
-                  <input type="text" name="email" id="phone" placeholder="Telefono">
+                  <input type="text" name="email" id="email" placeholder="Correo electronico">
                 </div>
                 <div class="input-contenedor">
                     <input type="password" name="password" id="Password" placeholder="Password">
-                 </div>
-                <div class="input-contenedor">
-                  <input type="text" name="level" id="level" placeholder="Nivel">
-                </div>
-                <div class="input-contenedor">
-                  <input type="text" name="status" id="status" placeholder="Estado">
-                </div>
-        
+                 </div><br>
+                 <label>Nivel</label>
+                 <select name="nivel" id="nivel" placeholder="Nivel">
+                     
+                    <option value="admin">Administrador</option>
+                    <option value="operador">Operador</option>
+                </select>
+            <br><br>
+                <label>Estado</label>
+                <select name="estado" id="estado" placeholder="Estado">
+                    <option value="true">Habilitado</option>
+                    <option value="false">Inhabilitado</option>
+                </select>
+        <br><br>
                   <input type="submit" class="button" value="Registrarse">
             </div>
         </section>
+        <br><br><br>
         </body>
         </html>
         <style>
@@ -51,7 +58,7 @@ $def with (message)
             #formulario{
               position: center;
               width: 425px;
-              height: 610px;
+              height: 570px;
               padding-top: 5px;
               background-color: white;
               border-radius: 20px;
@@ -102,7 +109,6 @@ $def with (message)
                 #formulario{
                     margin: auto;
                     width: 500px;
-                    margin-top: 150px;
                     border-radius: 2%;
                 }
             }

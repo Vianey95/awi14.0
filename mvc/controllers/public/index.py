@@ -3,15 +3,7 @@ import pyrebase #Se importa la libreria para conectarse a la firebase pip instal
 import firebase_config as token 
 import json # se importa la libreria (JSON)
 
-urls = (
-    '/index', 'Index', 
-    '/login', 'Login',
-    '/bienvenida', 'Bienvenida',
-    '/bienvenida2', 'Bienvenida2',
-    '/recuperar', 'Recuperar',
 
-    
-) #url de las paginas a acceder
 
 index = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
@@ -33,7 +25,7 @@ class Login: #clase login
             message = "Error en el sistema" # se alamacena un mensaje de eror
             print("Error Login.GET: {}".format(error)) # se imprime el error que ocurrio
             return render.login(message) # se renderiza nuevamente login con el mensaje de error
-    def POST(self): # se invoca al recibir el formulario
+def POST(self): # se invoca al recibir el formulario
         try: # prueba el siguiente bloque de codigo
             message = None # se crea una variable para el mensaje de error que se mostrara si la autenticacion es incorrecta
             firebase = pyrebase.initialize_app(token.firebaseConfig) #se realiza la autenticacion con firebase
@@ -45,7 +37,20 @@ class Login: #clase login
             user = auth.sign_in_with_email_and_password(email, password) #codigo para inisiar sesion de usuarios
             web.setcookie('localIdd', user['localId'], 3600) # se almacena en una cookie el localIdd
             print("localId:",web.cookies().get('localIdd')) # se imprime la cookie 
-            return web.seeother("bienvenida2") # Redirecciona a la pagna bienvenida
+            all_users = db.child("usuarios").get() #obtiene todos los usuarios
+            for user in all_users.each():
+                if user.key() == localIdd and user.val()['level'] == "admin": #compara el localId y el email
+                    if user.val()['status'] == 'true':
+                        return web.seeother('/bienvenida') #redirecciona a la pagina de admin
+                    else:
+                        admin = user.val()['level'] == "admin"
+                        return web.seeother('/login')
+                elif user.key() == localIdd and user.val()['level'] == "operador":
+                    if user.val()['status'] == 'true':
+                        return web.seeother('/bienvenida2') #redirecciona a la pagina de operador
+                    else:
+                        admin = user.val()['level'] == "admin"
+                        return web.seeother('/login')
         except Exception as error: # atrapa algun error
             formato = json.loads(error.args[1]) # Error en formato JSON 1 puede variar segun el numero que indiques (son parte del codigo de error json)
             error = formato['error'] # Se obtiene el json de error
@@ -96,7 +101,37 @@ class Recuperar: #clase recuperar password
             error = formato['error'] 
             message = error['message']
             print("Error recuperar.POST: {}".format(message))
-            return render.recuperar(message)          
+            return render.recuperar(message)         
+class Registrar: 
+    def GET(self):
+        message = None
+        return render.registrar(message)
+
+    def POST(self):
+        try:
+            message = None
+            firebase = pyrebase.initialize_app(token.firebaseConfig)
+            auth = firebase.auth() 
+            db = firebase.database()
+            formulario = web.input()
+            nombre = formulario.nombre
+            telefono = formulario.telefono
+            email = formulario.email
+            password= formulario.password
+            nivel = formulario.nivel
+            estado = formulario.estado
+            user = auth.create_user_with_email_and_password(email, password) 
+            datos_user = {'nombre': nombre, 'telefono': telefono, 'email':email, 'nivel':nivel, 'estado':estado} 
+            results = db.child("usuarios").child(user['localId']).set(datos) 
+            print(datos_user)
+            print(results)
+            return web.seeother('/lista_user') 
+        except Exception as error:
+            formato = json.loads(error.args[1])
+            error = formato['error']
+            message = error['message']
+            print("Error registrar.POST: {}".format(message)) 
+            return render.registrar(message)  
 if __name__ == "__main__":
     web.config.debug = False # Activa  el modo de repuracion de firebase
     index.run() # ejecuta al web app   

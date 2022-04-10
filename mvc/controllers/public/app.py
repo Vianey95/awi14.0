@@ -3,21 +3,10 @@ import pyrebase #Se importa la libreria para conectarse a la firebase pip instal
 import firebase_config as token 
 import json # se importa la libreria (JSON)
 
-urls = (
-    '/index', 'Index',
-    '/login', 'Login', #raiz/ clase
-    '/bienvenida', 'Bienvenida',
-    '/logout' , 'Logout'
-    '/recuperar' , 'Recuperar'
-) #url de las paginas a acceder
-
 app = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html 
 
-class Logout: #clase loguot
-    def GET(self):
-        web.setcookie('localIdd' == None) # Cambiar el valor de localidd a vacio 
-        return render.seeother("/") #renderizar a loguot
+
 class Bienvenida:
     def GET(self): #se invoca al entrar ala ruta /bienvenida
         try: # prueba el siguiente bloque de codigo
@@ -49,11 +38,23 @@ class Login: #clase login
             password= formulario.password # se alamcena el valor de password del formulario
             print(email,password) # se imprimen para verificar los valores recibidos
             user = auth.sign_in_with_email_and_password(email, password) #codigo para inisiar sesion de usuarios
-           
             web.setcookie('localIdd', user['localId'], 3600) # se almacena en una cookie el localIdd
             print("localId:",web.cookies().get('localIdd')) # se imprime la cookie 
 
-            return web.seeother("bienvenida") # Redirecciona a la pagna bienvenida
+            all_users = db.child("usuarios").get() #obtiene todos los usuarios
+            for user in all_users.each():
+                if user.key() == localIdd and user.val()['level'] == "admin": #compara el localId y el email
+                    if user.val()['status'] == 'true':
+                        return web.seeother('/bienvenida') #redirecciona a la pagina de admin
+                    else:
+                        admin = user.val()['level'] == "admin"
+                        return web.seeother('/login')
+                elif user.key() == localId and user.val()['level'] == "operador":
+                    if user.val()['status'] == 'true':
+                        return web.seeother('/bienvenida2') #redirecciona a la pagina de operador
+                    else:
+                        admin = user.val()['level'] == "admin"
+                        return web.seeother('/login')
         except Exception as error: # atrapa algun error
             formato = json.loads(error.args[1]) # Error en formato JSON 1 puede variar segun el numero que indiques (son parte del codigo de error json)
             error = formato['error'] # Se obtiene el json de error
