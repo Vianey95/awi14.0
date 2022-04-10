@@ -1,4 +1,4 @@
-$def with (user)
+$def with (datos_user)
 <!DOCTYPE HTML> <!--El<html>es la raiz de la página html.¡-->
 <HTML>
 <HEAD> 
@@ -10,33 +10,29 @@ $def with (user)
 <header class="encabezado"> 
    <nav>
       <ul> 
-          <li><a href="/login"> Home </a></li>
+          <li><a href="/bienvenida"> Home </a></li>
       </ul> 
    </nav>
 </header> 
-        <h1>Lista de usuarios</h1>
-        <table> 
+        <h3>Lista de usuarios</h3><br><br>
+        <table > 
           <thead> 
-            <tr> 
               <th>Nombre usuario</th>
               <th>Telefono</th>
               <th>Email</th>
               <th>Nivel</th>
               <th>Estado</th>
               <th>Actualizar</th>
-            </tr>
+          </thead>
             $for user in datos_user:
-            <tbody><tr> 
+            <tr> 
               <td>$user.val().get('nombre')</td>
               <td>$user.val().get('telefono')</td>
               <td>$user.val().get('email')</td>
               <td>$user.val().get('nivel')</td>
               <td>$user.val().get('estado')</td>
               <td><a href="/actualizar"> Actualizar </a></td>
-              <td> </td>
             </tr>
-               </tbody>
-          </thead>
         </table>
         
     </body>
@@ -61,10 +57,10 @@ h2 {
      text-align: center;
 }
 h3 {
-     font-size: 60px;
+     font-size: 50px;
      font-family: Garamond;
      text-align: center;
-     color: red;
+     color: black;
 }
 h4 {
      font-size: 5;
@@ -138,5 +134,22 @@ header {
     text-align: center;
     margin-bottom: 40px;
   }
+
+
+  table {
+   border-collapse: separate;
+   border-spacing: 5px;
+   background: #000 url("gradient.gif") bottom left repeat-x;
+   color: #fff;
+   align-items: center;
+   padding: 3;
+   text-align: center;
+}
+td, th {
+   background: #fff;
+   color: #000;
+   text-align: center;
+   padding: 3px
+}
   </style>
   

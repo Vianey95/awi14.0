@@ -37,13 +37,13 @@ class Login: #clase login
                         return web.seeother('/bienvenida') 
                     else:
                         admin = user.val()['nivel'] == "admin"
-                        return web.seeother('/logout')
+                        return web.seeother('/login')
                 elif user.key() == localId and user.val()['nivel'] == "operador":
                     if user.val()['estado'] == 'true':
                         return web.seeother('/bienvenida2') 
                     else:
                         admin = user.val()['nivel'] == "admin"
-                        return web.seeother('/logout')
+                        return web.seeother('/login')
         except Exception as error: 
             formato = json.loads(error.args[1]) # Error en formato JSON 1 puede variar segun el numero que indiques (son parte del codigo de error json)
             error = formato['error'] # Se obtiene el json de error

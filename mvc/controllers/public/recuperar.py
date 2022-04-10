@@ -1,11 +1,6 @@
 import web  #se importa la libreria web.py
 import app
 
-urls = (
-    '/login', 'Login',
-    '/recuperar' , 'Recuperar'
-)
-
 recuperar = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/public')
 class Recuperar: #clase recuperar password

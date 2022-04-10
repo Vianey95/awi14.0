@@ -4,19 +4,16 @@ import app
 import mvc.firebase_config as token
 import json
 
-
 render = web.template.render('mvc/views/admin') # se menciona la carpeta en donde se encontraran nuestros archivos html 
-class Registrar: 
-    def GET(self):
-        message = None
-        return render.registrar(message)
-
-    def POST(self):
+class Actualizar: 
+    def GET(self, localId):
+        return render.actualizar()
+    def POST(self,localId):
         try:
-            message = None
             firebase = pyrebase.initialize_app(token.firebaseConfig)
             auth = firebase.auth() 
             db = firebase.database()
+            users= db.child("usuarios").child(user['localId']).get() 
             formulario = web.input()
             nombre = formulario.nombre
             telefono = formulario.telefono
@@ -24,17 +21,14 @@ class Registrar:
             password= formulario.password
             nivel = formulario.nivel
             estado = formulario.estado
-            user = auth.create_user_with_email_and_password(email, password) 
+            user = auth.update_user
             datos_user = {'nombre': nombre,
                           'telefono': telefono,
                           'email':email, 
                           'nivel':nivel, 
                           'estado':estado} 
-            db.child("usuarios").child(user['localId']).set(datos_user) 
-            return web.seeother('/bienvenida') 
+            result=db.child("up").child(nombre).update(datos_user)         
+            return web.seeother('/lista_user') 
         except Exception as error:
-            formato = json.loads(error.args[1])
-            error = formato['error']
-            message = error['message']
-            print("Error registrar.POST: {}".format(message)) 
-            return render.registrar(message) 
+            print("Error actualizar.POST: {}".format(error)) 
+            return web.seeother('/lista_user')

@@ -14,6 +14,6 @@ class Lista_user:
             db = firebase.database()
             datos_user = db.child("usuarios").get()
             print(datos_user)
-            return render.lista_users(datos_user) 
+            return render.lista_user(datos_user) 
         except Exception as error:
-            return render.usuarios(error)   
+            return render.lista_user(error)   

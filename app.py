@@ -8,9 +8,10 @@ urls = (
     '/recuperar', 'mvc.controllers.public.recuperar.Recuperar',
     '/logout', 'mvc.controllers.public.logout.Logout',
     '/bienvenida', 'mvc.controllers.admin.bienvenida.Bienvenida',
-    '/bienvenida2', 'mvc.controllers.operador.bienvenida.Bienvenida2',
+    '/bienvenida_o', 'mvc.controllers.operador.bienvenida_o.Bienvenida_o',
     '/lista_user', 'mvc.controllers.admin.lista_user.Lista_user',
     '/registrar', 'mvc.controllers.admin.registrar.Registrar',
+    '/actualizar', 'mvc.controllers.admin.actualizar.Actualizar',
 
     
 ) #url de las paginas a acceder
