@@ -3,9 +3,10 @@ import app
 import pyrebase
 import firebase_config as token
 
-render = web.template.render("mvc/views/operador/")
+render = web.template.render("mvc/views/admin/")
 
-class Bienvenida2:
+
+class Bienvenida:
     def GET(self):
         firebase = pyrebase.initialize_app(token.firebaseConfig)
         auth = firebase.auth() 
@@ -14,7 +15,7 @@ class Bienvenida2:
         nombre = db.child("usuarios").child(localidd).get()
         sucu_1 = db.child("sensores").child("sucursal_1").child("enfriamiento").get()
         sucu_2 = db.child("sensores").child("sucursal_2").child("enfriamiento").get()
-        return render.bienvenida2(sucu_1,sucu_2)
+        return render.bienvenida(sucu_1,sucu_2)
     
     def POST(self):
         form = web.input()
@@ -25,4 +26,6 @@ class Bienvenida2:
         localidd = web.cookies().get('localid')
         sucu_1 = db.child("sensores").child("sucursal1").child("enfriamiento").get()
         sucu_2 = db.child("sensores").child("sucursal2").child("enfriamiento").get()
-        return render.bienvenida2(sucu_1, sucu_2, )
+        return render.bienvenida(sucu_1, sucu_2, )
+
+

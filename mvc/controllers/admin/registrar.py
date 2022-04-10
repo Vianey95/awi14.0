@@ -1,7 +1,7 @@
 import web
 import pyrebase
 import app
-import firebase_config as token
+import mvc.firebase_config as token
 import json
 
 
@@ -25,11 +25,16 @@ class Registrar:
             nivel = formulario.nivel
             estado = formulario.estado
             user = auth.create_user_with_email_and_password(email, password) 
-            datos_user = {'nombre': nombre, 'telefono': telefono, 'email':email, 'nivel':nivel, 'estado':estado} 
+            datos_user = {'nombre': nombre,
+                          'telefono': telefono,
+                          'email':email, 
+                          'nivel':nivel, 
+                          'estado':estado} 
+
             results = db.child("usuarios").child(user['localId']).set(datos_user) 
             print(datos_user)
             print(results)
-            return web.seeother('/index') 
+            return web.seeother('/bienvenida') 
         except Exception as error:
             formato = json.loads(error.args[1])
             error = formato['error']

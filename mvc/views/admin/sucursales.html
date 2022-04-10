@@ -13,12 +13,49 @@
           <li><a href="/index"> Home</a></li>
       </ul> 
    </nav>
-</header>   
-<br>
-<br> 
-</body>  
-<header>                                                                                             
-</HTML>
+   <h3>Sucursal 1</h3>
+           <p>Temperatura</p>
+           <p class="data"><span id="tem_s1"></span>&deg;C</p> 
+
+           <br><br>
+           <p >Humedad</p>
+           <p class="data"><span id="hum_s1"></span>&percnt;</p>
+       <br><br>
+           <p align="center">Sistema enfriamiento</p> 
+           <form method="post">
+               <input type="text"  value="$sucu_2.val()" name="enfri_sucu2"/>
+               $if (sucu_1.val() == on):
+                   <button type="submit" value=off name="enfri_sucu1" >Desactivar enfriamiento</button>
+               $else:
+                   <button type="submit" value=on name="enfri_sucu2" >Activar enfriamiento</button>
+               
+           </form>
+       </div>
+   </div>
+   <h2>Sucursal 2</h2>
+   <div class="sucursal">
+       <div class="card">
+           <p class="text"><i class="bi bi-thermometer-half"></i>Temperatura</p>
+           <p class="data"><span id="tem_s2"></span>&deg;C</p>   
+       </div>
+       <div class="card">
+           <p class="text"><i class="bi bi-droplet-fill"></i>Humedad</p>
+           <p class="data"><span id="hum_s2"></span>&percnt;</p>
+       </div>
+       <div class="card">
+           <p class="text"><i class="bi bi-snow"></i>Sistema enfriamiento</p>
+           <form method="post">
+               <input type="text" style="display: none;" value="$estado_s1.val()" name="enfriamiento_s1"/>
+               $if (estado_s2.val() == 1):
+                   <button type="submit" value=0 name="enfriamiento_s2" style="background-color: rgba(255, 0, 0, 0.7); border-width: 0px; border-radius: 5px;">Apagar</button>
+               $else:
+                   <button type="submit" value=1 name="enfriamiento_s2" style="background-color: rgba(0, 255, 0, 0.7); border-width: 0px; border-radius: 5px;">Encender</button>
+           </form>
+       </div>
+   </div>
+</div>
+</body>
+</html>
 <style>
     * {
     margin: 0; 
