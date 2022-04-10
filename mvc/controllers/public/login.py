@@ -40,7 +40,7 @@ class Login: #clase login
                         return web.seeother('/login')
                 elif user.key() == localId and user.val()['nivel'] == "operador":
                     if user.val()['estado'] == 'true':
-                        return web.seeother('/bienvenida2') 
+                        return web.seeother('/bienvenida_o') 
                     else:
                         admin = user.val()['nivel'] == "admin"
                         return web.seeother('/login')

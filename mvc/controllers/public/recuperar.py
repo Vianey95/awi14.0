@@ -1,7 +1,5 @@
 import web  #se importa la libreria web.py
 import app
-
-recuperar = web.application(urls, globals()) # configura las urls en la aplicacion web
 render = web.template.render('mvc/views/public')
 class Recuperar: #clase recuperar password
     def GET(self): 
