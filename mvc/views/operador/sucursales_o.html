@@ -1,0 +1,68 @@
+</header>
+<h1 style="padding: 15px;">Bienvenid@ <strong>$nombre.val().get('nombre')</strong></h1>
+<div class="dashboard">
+    <h3>Sucursal 1</h3>
+    <div class="sucursal">
+        <div class="card">
+            <p class="text"><i class="bi bi-thermometer-high"></i>Temperatura</p>
+            <p class="data"><span id="tem_s1"></span>&deg;C</p>   
+        </div>
+        <div class="card">
+            <p class="text"><i class="bi bi-droplet-fill"></i>Humedad</p>
+            <p class="data"><span id="hum_s1"></span>&percnt;</p>
+        </div>
+        <div class="card">
+            <p class="text"><i class="bi bi-snow"></i>Sistema enfriamiento</p> 
+            <form method="post">
+                <input type="text" style="display: none;" value="$estado_s2.val()" name="enfriamiento_s2"/>
+                $if (estado_s1.val() == 1):
+                    <button type="submit" value=0 name="enfriamiento_s1" style="background-color: rgba(255, 0, 0, 0.7); border-width: 0px; border-radius: 5px;">Apagar</button>
+                $else:
+                    <button type="submit" value=1 name="enfriamiento_s1" style="background-color: rgba(0, 255, 0, 0.7); border-width: 0px; border-radius: 5px;">Encender</button>
+                
+            </form>
+        </div>
+    </div>
+    <h3>Sucursal 2</h3>
+    <div class="sucursal">
+        <div class="card">
+            <p class="text"><i class="bi bi-thermometer-half"></i>Temperatura</p>
+            <p class="data"><span id="tem_s2"></span>&deg;C</p>   
+        </div>
+        <div class="card">
+            <p class="text"><i class="bi bi-droplet-fill"></i>Humedad</p>
+            <p class="data"><span id="hum_s2"></span>&percnt;</p>
+        </div>
+        <div class="card">
+            <p class="text"><i class="bi bi-snow"></i>Sistema enfriamiento</p>
+            <form method="post">
+                <input type="text" style="display: none;" value="$estado_s1.val()" name="enfriamiento_s1"/>
+                $if (estado_s2.val() == 1):
+                    <button type="submit" value=0 name="enfriamiento_s2" style="background-color: rgba(255, 0, 0, 0.7); border-width: 0px; border-radius: 5px;">Apagar</button>
+                $else:
+                    <button type="submit" value=1 name="enfriamiento_s2" style="background-color: rgba(0, 255, 0, 0.7); border-width: 0px; border-radius: 5px;">Encender</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+window.setInterval(function(){
+var request = new XMLHttpRequest();
+request.open('GET','https://awi4-4bc78-default-rtdb.firebaseio.com/sensores.json');
+request.onload = () => {
+    const response = request.responseText;
+    console.log(response); /* Imprime en la consola los datos */
+    const json = JSON.parse(response);
+    document.getElementById('tem_s1').innerHTML = json['sucursal1'].temperatura;
+    document.getElementById('hum_s1').innerHTML = json['sucursal1'].humedad;
+    /*document.getElementById('').innerHTML = json[''].temperatura;*/
+    document.getElementById('tem_s2').innerHTML = json['sucursal2'].temperatura;
+    document.getElementById('hum_s2').innerHTML = json['sucursal2'].humedad;
+    /*document.getElementById('').innerHTML = json[''].temperatura;*/
+};
+request.send();
+}, 100);
+</script>
+

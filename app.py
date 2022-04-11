@@ -12,7 +12,8 @@ urls = (
     '/lista_user', 'mvc.controllers.admin.lista_user.Lista_user',
     '/registrar', 'mvc.controllers.admin.registrar.Registrar',
     '/actualizar', 'mvc.controllers.admin.actualizar.Actualizar',
-    '/sucursales', 'mvc.controllers.admin.sucursales.Sucursales'
+    '/sucursales', 'mvc.controllers.admin.sucursales.Sucursales',
+    '/sucursales_o', 'mvc.controllers.operador.sucursales_o.Sucursales_o'
     
 ) #url de las paginas a acceder
 
