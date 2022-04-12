@@ -1,4 +1,3 @@
-$def with (sucu_1_p1, sucu_1_p2, sucu_1_p11, sucu_1_p22)
 <!DOCTYPE HTML> <!--El<html>es la raiz de la página html.¡-->
 <HTML>
 <HEAD> 
@@ -12,25 +11,26 @@ $def with (sucu_1_p1, sucu_1_p2, sucu_1_p11, sucu_1_p22)
     <th>Temperatura producto 2</th>
     <th>Humedad producto 2</th>
     <tr>
-        <td id="Sucursal_1_Temperatura">{{Temperatura producto 1}}</td>
-        <td id="sucursal_1_Humedad">{{Humedad producto 1}}</td>
-        <td id="sucursal_1_2_Temperatura">{{Temperatura producto 2}}</td>
-        <td id="sucursal_1_2_Humedad">{{Humedad producto 2}}</td>
+        <td id="tem_p1">{{Temperatura producto 1}}</td>
+        <td id="hum_p1">{{Humedad producto 1}}</td>
+        <td id="tem_p2">{{Temperatura producto 2}}</td>
+        <td id="hum_p2">{{Humedad producto 2}}</td>
     </tr>
 </table>
-<script> /*--Script para consultar el JSON de firebase */
+<script> 
     window.setInterval(function(){
         var request = new XMLHttpRequest();
-        request.open('GET',"UsersData");
+        request.open('GET',"https://awi4-37ce8-default-rtdb.firebaseio.com/sucursal1.json");
         request.onload = () => {
             const response = request.responseText;
-            console.log(response); /* Imprime en la consola los datos */
+            console.log(response); 
             const json = JSON.parse(response);
-            document.getElementById('Sucursal_1_Temperatura').innerHTML = json['Sucursal_1_Temperatura'].Temperatura;
-            document.getElementById('sucursal_1_Humedad').innerHTML = json['sucursal_1_Humedad'].Temperatura;
-            document.getElementById('sucursal_1_2_Temperatura').innerHTML = json['sucursal_1_2_Temperatura'].Temperatura;
-            document.getElementById('sucursal_1_2_Humedad').innerHTML = json['sucursal_1_2_Humedad'].Temperatura;
+            document.getElementById('tem_p1').innerHTML = json['tem_p1'].temperatura;
+            document.getElementById('hum_p1').innerHTML = json['hum_p1'].humedad;
+            document.getElementById('tem_p2').innerHTML = json['tem_p2'].temperatura;
+            document.getElementById('hum_p2').innerHTML = json['hum_p2'].humedad;
         };
         request.send();
     }, 1000);
 </script>
+
