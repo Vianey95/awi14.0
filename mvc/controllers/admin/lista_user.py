@@ -5,7 +5,6 @@ import app
 import mvc.firebase_config as token
 render = web.template.render('mvc/views/admin/') # se menciona la carpeta en donde se encontraran nuestros archivos html
 
-
 class Lista_user:
     def GET(self):
         try:

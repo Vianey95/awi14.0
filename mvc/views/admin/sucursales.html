@@ -1,4 +1,4 @@
-$def with (sucu_1, sucu_2)
+$def with (sucu_1_p1, sucu_1_p2, sucu_1_p11, sucu_1_p22)
 <!DOCTYPE HTML> <!--El<html>es la raiz de la página html.¡-->
 <HTML>
 <HEAD> 
@@ -6,59 +6,31 @@ $def with (sucu_1, sucu_2)
    <title>Proyecto</title>
    <meta name="description" content="pa">
 
-   <h3>Sucursal 1</h3>
-           <p>Temperatura</p>
-           <p class="data"><span id="tem_s1"></span>&deg;C</p> 
-
-           <br><br>
-           <p >Humedad</p>
-           <p class="data"><span id="hum_s1"></span>&percnt;</p>
-       <br><br>
-           <p>Sistema enfriamiento</p> 
-           <form method="post">
-               <input type="text"  value="$sucu_2.val()" name="enfri_sucu2"/>
-               $if (sucu_1.val() == on):
-                   <button type="submit" value=off name="enfri_sucu1" >Desactivar enfriamiento</button>
-               $else:
-                   <button type="submit" value=on name="enfri_sucu2" >Activar enfriamiento</button>
-               
-           </form>
-       </div>
-   </div>
-   <h2>Sucursal 2</h2>
-   <p>Temperatura</p>
-   <p class="data"><span id="tem_s2"></span>&deg;C</p> 
-
-   <br><br>
-   <p >Humedad</p>
-   <p class="data"><span id="hum_s2"></span>&percnt;</p>
-<br><br>
-   <p>Sistema enfriamiento</p> 
-   <form method="post">
-       <input type="text"  value="$sucu_2.val()" name="enfri_sucu2"/>
-       $if (sucu_1.val() == on):
-           <button type="submit" value=off name="enfri_sucu1" >Desactivar enfriamiento</button>
-       $else:
-           <button type="submit" value=on name="enfri_sucu2" >Activar enfriamiento</button>
-       
-   </form>
-</div>
-</div>
-</body>
-</html>
-<script>
-  window.setInterval(function(){
-      var request = new XMLHttpRequest();
-      request.open('GET','');
-      request.onload = () => {
-          const response = request.responseText;
-          console.log(response); 
-          const json = JSON.parse(response);
-          document.getElementById('tem_s1').innerHTML = json['sucursal_1'].temperatura;
-          document.getElementById('hum_s1').innerHTML = json['sucursal_1'].humedad;
-          document.getElementById('tem_s2').innerHTML = json['sucursal_2'].temperatura;
-          document.getElementById('hum_s2').innerHTML = json['sucursal_2'].humedad;
-      };
-      request.send();
-  }, 100);
+   <table>
+    <th>Temperatura producto 1</th>
+    <th>Humedad producto 1</th>
+    <th>Temperatura producto 2</th>
+    <th>Humedad producto 2</th>
+    <tr>
+        <td id="Sucursal_1_Temperatura">{{Temperatura producto 1}}</td>
+        <td id="sucursal_1_Humedad">{{Humedad producto 1}}</td>
+        <td id="sucursal_1_2_Temperatura">{{Temperatura producto 2}}</td>
+        <td id="sucursal_1_2_Humedad">{{Humedad producto 2}}</td>
+    </tr>
+</table>
+<script> /*--Script para consultar el JSON de firebase */
+    window.setInterval(function(){
+        var request = new XMLHttpRequest();
+        request.open('GET',"UsersData");
+        request.onload = () => {
+            const response = request.responseText;
+            console.log(response); /* Imprime en la consola los datos */
+            const json = JSON.parse(response);
+            document.getElementById('Sucursal_1_Temperatura').innerHTML = json['Sucursal_1_Temperatura'].Temperatura;
+            document.getElementById('sucursal_1_Humedad').innerHTML = json['sucursal_1_Humedad'].Temperatura;
+            document.getElementById('sucursal_1_2_Temperatura').innerHTML = json['sucursal_1_2_Temperatura'].Temperatura;
+            document.getElementById('sucursal_1_2_Humedad').innerHTML = json['sucursal_1_2_Humedad'].Temperatura;
+        };
+        request.send();
+    }, 1000);
 </script>
