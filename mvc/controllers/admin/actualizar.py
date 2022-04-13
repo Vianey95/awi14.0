@@ -24,7 +24,7 @@ class Actualizar:
             user = auth.update_user
             datos_user = {'nombre': nombre,'telefono': telefono, 'email':email,  'nivel':nivel,  'estado':estado} 
             result=db.child("up").child(nombre).update(datos_user)         
-            return web.seeother('/lista_user') 
+            return web.seeother('/actualizar') 
         except Exception as error:
             print("Error actualizar.POST: {}".format(error)) 
-            return web.seeother('/lista_user')
+            return web.seeother('/actualizar')
