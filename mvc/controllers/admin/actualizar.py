@@ -22,11 +22,7 @@ class Actualizar:
             nivel = formulario.nivel
             estado = formulario.estado
             user = auth.update_user
-            datos_user = {'nombre': nombre,
-                          'telefono': telefono,
-                          'email':email, 
-                          'nivel':nivel, 
-                          'estado':estado} 
+            datos_user = {'nombre': nombre,'telefono': telefono, 'email':email,  'nivel':nivel,  'estado':estado} 
             result=db.child("up").child(nombre).update(datos_user)         
             return web.seeother('/lista_user') 
         except Exception as error:
