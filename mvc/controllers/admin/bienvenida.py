@@ -12,8 +12,7 @@ class Bienvenida:
             print("Bienvenida.GET localID: ",web.cookies().get('localId')) # se imprime el valor de localIdd
             if web.cookies().get('localId') == None: # Validar si el usuario esta logueado
                 return web.seeother("bienvenida") # si no esta logueado renderiza a login
-            else: #si no 
-                #TODO UN IF
+            else:
                 return render.bienvenida() #se renderiza bienvenida.html
         except Exception as error: # se atrapa algun error
             print("Error Bienvenida.GET: {}".format(error))  
