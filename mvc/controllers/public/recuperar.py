@@ -1,5 +1,8 @@
 import web  #se importa la libreria web.py
 import app
+import json
+import pyrebase
+import mvc.firebase_config as token
 render = web.template.render('mvc/views/public')
 class Recuperar: #clase recuperar password
     def GET(self): 

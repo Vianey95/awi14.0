@@ -1,68 +1,169 @@
-</header>
-<h1 style="padding: 15px;">Bienvenid@ <strong>$nombre.val().get('nombre')</strong></h1>
-<div class="dashboard">
-    <h3>Sucursal 1</h3>
-    <div class="sucursal">
-        <div class="card">
-            <p class="text"><i class="bi bi-thermometer-high"></i>Temperatura</p>
-            <p class="data"><span id="tem_s1"></span>&deg;C</p>   
-        </div>
-        <div class="card">
-            <p class="text"><i class="bi bi-droplet-fill"></i>Humedad</p>
-            <p class="data"><span id="hum_s1"></span>&percnt;</p>
-        </div>
-        <div class="card">
-            <p class="text"><i class="bi bi-snow"></i>Sistema enfriamiento</p> 
-            <form method="post">
-                <input type="text" style="display: none;" value="$estado_s2.val()" name="enfriamiento_s2"/>
-                $if (estado_s1.val() == 1):
-                    <button type="submit" value=0 name="enfriamiento_s1" style="background-color: rgba(255, 0, 0, 0.7); border-width: 0px; border-radius: 5px;">Apagar</button>
-                $else:
-                    <button type="submit" value=1 name="enfriamiento_s1" style="background-color: rgba(0, 255, 0, 0.7); border-width: 0px; border-radius: 5px;">Encender</button>
-                
-            </form>
-        </div>
-    </div>
-    <h3>Sucursal 2</h3>
-    <div class="sucursal">
-        <div class="card">
-            <p class="text"><i class="bi bi-thermometer-half"></i>Temperatura</p>
-            <p class="data"><span id="tem_s2"></span>&deg;C</p>   
-        </div>
-        <div class="card">
-            <p class="text"><i class="bi bi-droplet-fill"></i>Humedad</p>
-            <p class="data"><span id="hum_s2"></span>&percnt;</p>
-        </div>
-        <div class="card">
-            <p class="text"><i class="bi bi-snow"></i>Sistema enfriamiento</p>
-            <form method="post">
-                <input type="text" style="display: none;" value="$estado_s1.val()" name="enfriamiento_s1"/>
-                $if (estado_s2.val() == 1):
-                    <button type="submit" value=0 name="enfriamiento_s2" style="background-color: rgba(255, 0, 0, 0.7); border-width: 0px; border-radius: 5px;">Apagar</button>
-                $else:
-                    <button type="submit" value=1 name="enfriamiento_s2" style="background-color: rgba(0, 255, 0, 0.7); border-width: 0px; border-radius: 5px;">Encender</button>
-            </form>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+<!DOCTYPE HTML> <!--El<html>es la raiz de la página html.¡-->
+<HTML>
+<HEAD> 
+   <meta charset="utf-8">
+   <title>Proyecto</title>
+   <meta name="description" content="pa">
+</head>
+<body>
+<header class="encabezado"> 
+   <nav>
+      <ul> 
+          <li><a href="/bienvenida_o"> Home </a></li>
+      </ul> 
+   </nav>
+</header>  <br><br><br>
+<div class="sucursal1"><h3>Sucursal 1</h3></div> <br><br><br>
+   <table>
+    <th>Temperatura producto 1</th>
+    <th>Temperatura producto 2</th>
+    <th>Humedad producto 1</th>
+    <th>Humedad producto 2</th>
+    <tr>
+        <td id="aaaaa">{{Temperatura producto 1}}</td>
+        <td id="bbbbb">{{Temperatura producto 2}}</td>
+        <td id="ccccc">{{Humedad producto 1}}</td>
+        <td id="cccccc">{{Humedad producto 2}}</td>
+    </tr>
+</table>
+
+
+<div class="sucursal2"><h3>Sucursal 2</h3></div> <br><br><br>
+  <table>
+    <table>
+      <th>Temperatura producto 1</th>
+      <th>Temperatura producto 2</th>
+      <th>Humedad producto 1</th>
+      <th>Humedad producto 2</th>
+      <tr>
+          <td id="aaaaa">{{Temperatura producto 1}}</td>
+          <td id="bbbbb">{{Temperatura producto 2}}</td>
+          <td id="ccccc">{{Humedad producto 1}}</td>
+          <td id="cccccc">{{Humedad producto 2}}</td>
+      </tr>
+  </table>
+
 <script>
-window.setInterval(function(){
-var request = new XMLHttpRequest();
-request.open('GET','https://awi4-4bc78-default-rtdb.firebaseio.com/sensores.json');
-request.onload = () => {
-    const response = request.responseText;
-    console.log(response); /* Imprime en la consola los datos */
-    const json = JSON.parse(response);
-    document.getElementById('tem_s1').innerHTML = json['sucursal1'].temperatura;
-    document.getElementById('hum_s1').innerHTML = json['sucursal1'].humedad;
-    /*document.getElementById('').innerHTML = json[''].temperatura;*/
-    document.getElementById('tem_s2').innerHTML = json['sucursal2'].temperatura;
-    document.getElementById('hum_s2').innerHTML = json['sucursal2'].humedad;
-    /*document.getElementById('').innerHTML = json[''].temperatura;*/
-};
-request.send();
-}, 100);
+    window.setInterval(function(){
+        var request = new XMLHttpRequest();
+        request.open('GET',"https://nuevo-57371-default-rtdb.firebaseio.com/admin_users/sensores");
+        request.onload = () => {
+            const response = request.responseText;
+            console.log(response); 
+            const json = JSON.parse(response);
+            document.getElementById('aaaaa').innerHTML = json['aaaaa'].temperatura;
+            document.getElementById('bbbbb').innerHTML = json['bbbb'].temperatura;
+            document.getElementById('ccccc').innerHTML = json['ccccc'].temperatura;
+            document.getElementById('cccccc').innerHTML = json['cccccc'].temperatura;
+        };
+        request.send();
+    }, 1000);
 </script>
 
+<style>
+    * {
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+.sucursal1{
+  background: #FFD1DC;
+}
+.sucursal2{
+  background: #bdecb6;
+}
+
+h1 {
+     text-align: center;
+     font-size: 12;
+}
+h2 {
+	
+	 color: (25,0,0);
+     font-size: 15;
+     font-family: courier new;
+     text-align: center;
+}
+h3 {
+     font-size: 50px;
+     font-family: Garamond;
+     text-align: center;
+     color: black;
+}
+h4 {
+     font-size: 5;
+     text-align: center;
+     color: red;
+
+}
+p{
+   font-size: 15px;
+     font-family: arial;
+     justify-content: space-around;
+}
+
+
+
+/*//////////////Menu//////////////////*/
+/*Datos generales de mi menu */
+*{
+  margin: 0;
+  padding: 0;
+}
+.encabezado{
+  background: #1a2537;
+}
+img{
+  width: 150px;
+  border-radius: 10%;
+}
+.encabezado nav{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+
+}
+.encabezado nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+a{
+  text-decoration: none;
+  font-size: 20px;
+  color: #075581;
+  padding: 12px 20px;
+  display: block;
+}
+a:hover{
+  background: #008A93;
+
+}
+.encabezado nav ul li ul{
+  display:flex;
+  flex-direction: column;
+}
+.encabezado nav ul li ul{
+  position: absolute;
+  background: #008A93;
+}
+.encabezado nav ul li ul{
+  display: none;
+}
+
+
+
+header {
+    padding: 40px 0;
+  }
+  
+  header .logo {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+
+  
+  </style>
+  
